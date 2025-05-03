@@ -13,6 +13,10 @@
   boot.supportedFilesystems = [ "ext4" 	"vfat" "ntfs" "exfat" ];
   boot.kernel.sysctl."vm.swappiness" = 10;
 
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [ "nix-command" "flakes" ];
+  };
   hardware.cpu.amd.updateMicrocode = true;
   system.nixos.tags = [ "external-display" ];
 
@@ -146,12 +150,16 @@
 
   environment.systemPackages = with pkgs; [
     acpilight
+    apfs-fuse
     asusctl
     dbeaver-bin
     ddcutil
     dmenu
+    aseqdump
+    emacs
     fzf
     home-manager
+    hydrogen
     git
     gnome-keyring
     lshw
@@ -171,10 +179,12 @@
     rofi
     ripgrep
     tmux
+    transmissions
     unrar
     unzip
     wezterm
     wget
+    wine
     xclip
     zoom-us
     linuxKernel.packages.linux_zen.asus-wmi-sensors
